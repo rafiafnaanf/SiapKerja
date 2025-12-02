@@ -9,6 +9,7 @@ class Settings(BaseSettings):
     firebase_bucket: str = Field("", env="FIREBASE_BUCKET")
     gemini_api_key: str = Field("", env="GEMINI_API_KEY")
     gemini_model: str = Field("gemini-2.0-flash", env="GEMINI_MODEL")
+    hf_token: str = Field("", env="HF_TOKEN")
     request_timeout_sec: int = 30
     ai_enabled: bool = True
 

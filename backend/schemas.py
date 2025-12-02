@@ -118,7 +118,7 @@ class InterviewFeedbackResponse(BaseModel):
 class CareerRoadmapRequest(BaseModel):
     job_field: str
     target_role: str
-    current_level: str
+    current_level: str = "ENTRY"
     known_skills: List[str] = []
     language: str = "id"
 

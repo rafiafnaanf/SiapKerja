@@ -31,6 +31,9 @@ backend/.pytest_cache/
 backend/.mypy_cache/
 backend/.ruff_cache/
 backend/*.db
+backend/.cache/
+backend/.huggingface/
+backend/models/
 *.log
 /app/build/
 /backend/build/

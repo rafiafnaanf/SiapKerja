@@ -10,6 +10,7 @@ from backend.schemas import (
     CareerRoadmapResponse,
 )
 from backend.services.ai import AIService
+from backend.services.stt import transcribe_bytes
 
 router = APIRouter(prefix="/ai", tags=["ai"])
 
@@ -54,5 +55,17 @@ async def career_roadmap(
 ):
     try:
         return await ai_service.career_pathway(req)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.post("/stt-interview")
+async def stt_interview(
+    audio: UploadFile = File(...),
+):
+    try:
+        content = await audio.read()
+        text = transcribe_bytes(content, language="id")
+        return {"text": text}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
