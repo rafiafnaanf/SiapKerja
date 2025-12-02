@@ -33,7 +33,7 @@ android {
         buildConfigField("String", "GEMINI_API_KEY", "\"$geminiApiKey\"")
         buildConfigField("String", "API_BASE_URL_EMULATOR", "\"http://10.0.2.2:8000/api/\"")
         // Update this to your laptop IP (same Wi-Fi) for physical device testing.
-        buildConfigField("String", "API_BASE_URL_PHYSICAL", "\"http://192.168.1.13:8000/api/\"")
+        buildConfigField("String", "API_BASE_URL_PHYSICAL", "\"http://192.168.100.219:8000/api/\"")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
