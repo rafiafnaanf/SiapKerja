@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from backend.db.session import get_db
-from backend.schemas import UserRead, UserCreate
+from backend.schemas import UserRead, UserCreate, UserUpdate, UserResponse
 from backend import models
 
 router = APIRouter(prefix="/db/user", tags=["user"])
@@ -15,22 +15,25 @@ def get_current_user(db: Session = Depends(get_db)) -> models.User:
     return user
 
 
-@router.get("", response_model=UserRead)
+@router.get("", response_model=UserResponse)
 def me(db: Session = Depends(get_db)):
     user = db.query(models.User).first()
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
-    return user
+    return {"user": user}
 
 
-@router.put("", response_model=UserRead)
-def update(payload: UserCreate, db: Session = Depends(get_db)):
+@router.put("", response_model=UserResponse)
+def update(payload: UserUpdate, db: Session = Depends(get_db)):
     user = db.query(models.User).first()
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
-    user.name = payload.name
-    user.job_field_preference = payload.job_field_preference
-    user.experience_level = payload.experience_level
+    if payload.name is not None:
+        user.name = payload.name
+    if payload.job_field_preference is not None:
+        user.job_field_preference = payload.job_field_preference
+    if payload.experience_level is not None:
+        user.experience_level = payload.experience_level
     db.commit()
     db.refresh(user)
-    return user
+    return {"user": user}

@@ -40,3 +40,17 @@ backend/models/
 /backend/dist/
 /backend/*.egg-info/
 google-services.json
+app/google-services.json
+
+# Android/Java keystore & certs
+*.keystore
+*.jks
+*.p12
+*.pfx
+*.pem
+*.key
+*.cer
+*.crt
+
+# Backend/local env variants
+backend/.env.*

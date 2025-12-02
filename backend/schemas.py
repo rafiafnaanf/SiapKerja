@@ -31,11 +31,29 @@ class UserRead(BaseModel):
         from_attributes = True
 
 
+class UserResponse(BaseModel):
+    user: UserRead
+
+
 class TokenResponse(BaseModel):
     access_token: str
     token_type: str = "bearer"
     expires_in: int
     refresh_token: Optional[str] = None
+
+
+class UserUpdate(BaseModel):
+    name: Optional[str] = None
+    job_field_preference: Optional[str] = None
+    experience_level: Optional[str] = None
+
+
+class AuthResponse(BaseModel):
+    user: UserRead
+    access_token: str
+    refresh_token: str | None = None
+    token_type: str = "bearer"
+    expires_in: int
 
 
 # AI payloads
